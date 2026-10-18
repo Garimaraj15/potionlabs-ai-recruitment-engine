@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PotionLabs — AI × Operations Recruitment Engine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --color-shell: #ffffff;
+      --color-sand: #f5f5f4;
+      --color-sand-dark: #eaeaea;
+      --color-ink: #111111;
+      --color-ink-2: #2b2b2b;
+      --color-ink-soft: #595959;
+      --color-ink-faint: #8c8c8c;
+      --color-line: rgba(0, 0, 0, 0.08);
+      --color-line-2: #dadada;
+      --color-clay: #6755e6;
+      --color-clay-hover: #5546c9;
+      --color-emerald: #10b981;
+      --color-rose: #ef4444;
+      --color-amber: #f59e0b;
+      --font-sans: 'Jost', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--color-shell);
+      color: var(--color-ink);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* PotionLabs Top Navigation */
+    .top-banner {
+      background-color: #0c0c0c;
+      color: #fff;
+      padding: 8px 24px;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .top-banner-tag {
+      background: var(--color-clay);
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-weight: 500;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-right: 8px;
+    }
+    
+    header {
+      border-bottom: 1px solid var(--color-line-2);
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-logo {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--color-ink);
+      text-decoration: none;
+    }
+    .brand-badge {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--color-sand);
+      color: var(--color-ink-soft);
+      border: 1px solid var(--color-line-2);
+      font-family: var(--font-mono);
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 4px;
+      background: var(--color-sand);
+      padding: 4px;
+      border-radius: 8px;
+      border: 1px solid var(--color-line-2);
+    }
+    .tab-btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-ink-soft);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .tab-btn:hover {
+      color: var(--color-ink);
+    }
+    .tab-btn.active {
+      background: #fff;
+      color: var(--color-ink);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .tab-counter {
+      background: var(--color-sand-dark);
+      padding: 1px 6px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-family: var(--font-mono);
+    }
+    .tab-btn.active .tab-counter {
+      background: var(--color-clay);
+      color: #fff;
+    }
+
+    /* Main Container */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px 60px;
+    }
+
+    /* Subheader breadcrumbs */
+    .breadcrumb-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--color-ink-faint);
+      margin-bottom: 24px;
+    }
+    .breadcrumb-row a {
+      color: var(--color-ink-soft);
+      text-decoration: none;
+    }
+    .breadcrumb-row a:hover {
+      color: var(--color-clay);
+    }
+
+    /* Tab Content Sections */
+    .tab-pane {
+      display: none;
+    }
+    .tab-pane.active {
+      display: block;
+    }
+
+    /* Section Headers */
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--color-clay);
+      margin-bottom: 4px;
+    }
+    .title-h1 {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--color-ink);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .desc-lead {
+      font-size: 15px;
+      color: var(--color-ink-soft);
+      max-width: 780px;
+      margin-bottom: 24px;
+    }
+
+    /* Metrics Strip */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .metric-card {
+      background: var(--color-sand);
+      border: 1px solid var(--color-line-2);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric-label {
+      font-size: 12px;
+      color: var(--color-ink-soft);
+      margin-bottom: 4px;
+    }
+    .metric-value {
+      font-size: 26px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: var(--color-ink);
+    }
+    .metric-sub {
+      font-size: 11px;
+      color: var(--color-ink-faint);
+      margin-top: 4px;
+    }
+
+    /* --- SWIPE REVIEW DECK STYLES (TINDER STYLE) --- */
+    .deck-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 540px;
+      position: relative;
+    }
+    .card-stack {
+      position: relative;
+      width: 100%;
+      max-width: 720px;
+      min-height: 480px;
+    }
+    .swipe-card {
+      background: #ffffff;
+      border: 1px solid var(--color-line-2);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      padding: 32px;
+      width: 100%;
+      position: relative;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+    }
+    .swipe-card.fly-right {
+      transform: translateX(120%) rotate(15deg);
+      opacity: 0;
+    }
+    .swipe-card.fly-left {
+      transform: translateX(-120%) rotate(-15deg);
+      opacity: 0;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--color-line);
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+    }
+    .candidate-name {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--color-ink);
+    }
+    .candidate-meta {
+      font-size: 13px;
+      color: var(--color-ink-soft);
+      display: flex;
+      gap: 12px;
+      margin-top: 4px;
+    }
+    .score-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    .score-circle {
+      font-family: var(--font-mono);
+      font-size: 22px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 8px;
+      background: #eff6ff;
+      color: var(--color-clay);
+      border: 1px solid rgba(103, 85, 230, 0.2);
+    }
+    .score-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-ink-faint);
+      margin-top: 4px;
+    }
+
+    /* Score Breakdown Grid */
+    .breakdown-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+      background: var(--color-sand);
+      padding: 12px;
+      border-radius: 8px;
+    }
+    .breakdown-item {
+      font-size: 11px;
+    }
+    .breakdown-title {
+      color: var(--color-ink-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .breakdown-bar {
+      height: 4px;
+      background: #ddd;
+      border-radius: 2px;
+      margin: 4px 0;
+      overflow: hidden;
+    }
+    .breakdown-fill {
+      height: 100%;
+      background: var(--color-clay);
+      border-radius: 2px;
+    }
+    .breakdown-num {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      color: var(--color-ink-2);
+    }
+
+    .reasoning-box {
+      background: #fbfbfb;
+      border-left: 3px solid var(--color-clay);
+      padding: 12px 16px;
+      border-radius: 0 6px 6px 0;
+      font-size: 13px;
+      color: var(--color-ink-2);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .reasoning-box strong {
+      color: var(--color-clay);
+      font-weight: 600;
+    }
+
+    .read-first-display {
+      background: #fff8f0;
+      border: 1px dashed #fbd38d;
+      padding: 12px 16px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      color: #744210;
+    }
+    .read-first-display .rf-label {
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .resume-snippet {
+      max-height: 180px;
+      overflow-y: auto;
+      background: var(--color-sand);
+      padding: 14px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--color-ink-2);
+      white-space: pre-wrap;
+      border: 1px solid var(--color-line);
+      margin-bottom: 24px;
+    }
+
+    /* Swipe Action Controls */
+    .swipe-controls {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 24px;
+      width: 100%;
+    }
+    .action-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-reject {
+      background: #fff;
+      color: var(--color-rose);
+      border: 2px solid var(--color-rose);
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.12);
+    }
+    .btn-reject:hover {
+      background: var(--color-rose);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+    .btn-accept {
+      background: var(--color-ink);
+      color: #fff;
+      border: 2px solid var(--color-ink);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+    }
+    .btn-accept:hover {
+      background: var(--color-clay);
+      border-color: var(--color-clay);
+      transform: translateY(-2px);
+    }
+    .hotkey-hint {
+      font-size: 11px;
+      opacity: 0.7;
+      font-family: var(--font-mono);
+      background: rgba(0,0,0,0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .btn-accept .hotkey-hint {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .empty-deck-notice {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--color-ink-soft);
+    }
+
+    /* --- APPLICATION FORM STYLES (MATCHING POTIONLABS) --- */
+    .form-wrapper {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .quick-preset-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--color-sand);
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      font-size: 13px;
+    }
+    .preset-btn {
+      background: #fff;
+      border: 1px solid var(--color-line-2);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      font-weight: 500;
+    }
+    .preset-btn:hover {
+      border-color: var(--color-clay);
+      color: var(--color-clay);
+    }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 16px;
+    }
+    .form-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-ink-soft);
+      margin-bottom: 6px;
+    }
+    .form-input, .form-textarea {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--color-line-2);
+      background: #fff;
+      padding: 12px 16px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--color-ink);
+      transition: all 0.2s ease;
+    }
+    .form-input:focus, .form-textarea:focus {
+      outline: none;
+      border-color: var(--color-clay);
+      box-shadow: 0 0 0 3px rgba(103, 85, 230, 0.15);
+    }
+    .form-textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .btn-submit-app {
+      background: var(--color-ink);
+      color: #fff;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      width: 100%;
+    }
+    .btn-submit-app:hover {
+      background: var(--color-clay);
+    }
+
+    /* Modal / Triage Alert */
+    .triage-alert-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      padding: 20px;
+    }
+    .triage-modal-content {
+      background: #fff;
+      border-radius: 12px;
+      max-width: 600px;
+      width: 100%;
+      padding: 32px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    /* --- FOLDERS & AUDIT TABLE --- */
+    .folder-section {
+      margin-bottom: 40px;
+    }
+    .folder-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--color-line);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+    .folder-title {
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .tag-count {
+      font-size: 12px;
+      font-family: var(--font-mono);
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--color-sand);
+    }
+
+    .table-container {
+      overflow-x: auto;
+      border: 1px solid var(--color-line-2);
+      border-radius: 8px;
+      background: #fff;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
+    }
+    th {
+      background: var(--color-sand);
+      padding: 12px 16px;
+      font-weight: 600;
+      color: var(--color-ink-soft);
+      border-bottom: 1px solid var(--color-line-2);
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+    }
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--color-line);
+      color: var(--color-ink-2);
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    .status-pill {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 999px;
+      display: inline-block;
+      font-family: var(--font-mono);
+    }
+    .status-accepted {
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+    .status-double-check {
+      background: #fffbeb;
+      color: #92400e;
+      border: 1px solid #fde68a;
+    }
+    .status-disqualified {
+      background: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+
+    .btn-promote {
+      background: var(--color-emerald);
+      color: #fff;
+      border: none;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-promote:hover {
+      background: #059669;
+    }
+
+    /* Outbox Logs Terminal */
+    .terminal-window {
+      background: #111;
+      color: #a3e635;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      border-radius: 8px;
+      padding: 16px;
+      height: 240px;
+      overflow-y: auto;
+      line-height: 1.6;
+      border: 1px solid #333;
+    }
+
+    /* Config Sliders */
+    .config-card {
+      background: var(--color-sand);
+      border: 1px solid var(--color-line-2);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .slider-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .slider-row label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-ink-2);
+      width: 280px;
+    }
+    .slider-row input[type="range"] {
+      flex: 1;
+      margin: 0 16px;
+    }
+    .slider-row span {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      width: 50px;
+      text-align: right;
+    }
+
+    @media (max-width: 768px) {
+      .header-inner {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+      }
+      .nav-tabs {
+        width: 100%;
+        overflow-x: auto;
+      }
+      .form-grid-2 {
+        grid-template-columns: 1fr;
+      }
+      .breakdown-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-banner">
+    <div>
+      <span class="top-banner-tag">Live Production Architecture</span>
+      <strong>PotionLabs Kolkata:</strong> AI × Operations Recruitment Engine (Automated Triage & Swipe Review Deck)
+    </div>
+    <div style="font-family: var(--font-mono); font-size: 11px;">
+      Worker Queue: <span id="worker-status-indicator" style="color: #4ade80;">● ACTIVE</span>
+    </div>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header>
+    <div class="header-inner">
+      <div class="brand-group">
+        <a href="#" class="brand-logo">PotionLabs.</a>
+        <span class="brand-badge">AI × Operations</span>
+      </div>
+
+      <nav class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('deck')">
+          <span>Swipe Review Deck</span>
+          <span class="tab-counter" id="counter-deck">0</span>
+        </button>
+        <button class="tab-btn" onclick="switchTab('apply')">
+          <span>Applicant Portal</span>
+        </button>
+        <button class="tab-btn" onclick="switchTab('folders')">
+          <span>Transparency Folders</span>
+          <span class="tab-counter" id="counter-folders">0</span>
+        </button>
+        <button class="tab-btn" onclick="switchTab('ops')">
+          <span>Worker & Schema Ops</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Subheader breadcrumbs -->
+    <div class="breadcrumb-row">
+      <a href="#">Home</a> /
+      <a href="#">Careers</a> /
+      <a href="#">AI & Coding Intern</a> /
+      <span style="color: var(--color-ink);" id="current-tab-label">Swipe Review Deck</span>
+    </div>
+
+    <!-- Live Metrics Strip -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-label">Pending In Deck</div>
+        <div class="metric-value" id="stat-pending">0</div>
+        <div class="metric-sub">Awaiting recruiter swipe</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Accepted (Stage 1)</div>
+        <div class="metric-value" style="color: var(--color-emerald);" id="stat-accepted">0</div>
+        <div class="metric-sub">Assignments auto-dispatched</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Double-Check Queue</div>
+        <div class="metric-value" style="color: var(--color-amber);" id="stat-double-check">0</div>
+        <div class="metric-sub">Guarded against false-negatives</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Instant Disqualified</div>
+        <div class="metric-value" style="color: var(--color-rose);" id="stat-disqualified">0</div>
+        <div class="metric-sub">0-delay empathetic notifications</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Average Match Score</div>
+        <div class="metric-value" style="color: var(--color-clay);" id="stat-avg-score">0.0</div>
+        <div class="metric-sub">Schema-driven AI signals</div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 1: SWIPE REVIEW DECK (TINDER STYLE)   -->
+    <!-- ========================================== -->
+    <div id="tab-deck" class="tab-pane active">
+      <div style="text-align: center; margin-bottom: 24px;">
+        <div class="eyebrow">Recruiter Operations Deck</div>
+        <h1 class="title-h1">Daily Applicant Review</h1>
+        <p class="desc-lead" style="margin: 0 auto;">
+          Candidates who passed baseline screening. Review signals, evaluate real-world depth, and swipe or use keyboard keys <strong>[←]</strong> to route to Double-Check or <strong>[→]</strong> to Accept & advance.
+        </p>
+      </div>
+
+      <div class="deck-container">
+        <div class="card-stack" id="deck-card-slot">
+          <!-- Dynamically populated candidate card -->
+          <div class="empty-deck-notice">
+            <h3>Loading pending candidate deck...</h3>
+          </div>
+        </div>
+
+        <div class="swipe-controls" id="deck-controls" style="display: none;">
+          <button class="action-btn btn-reject" onclick="triggerSwipe('reject')" title="Reject & route to Double-Check Queue (Left Arrow)">
+            <span>✕ REJECT</span>
+            <span class="hotkey-hint">← Left Key</span>
+          </button>
+          <button class="action-btn btn-accept" onclick="triggerSwipe('accept')" title="Accept & dispatch technical assignment (Right Arrow)">
+            <span>✓ ACCEPT & ADVANCE</span>
+            <span class="hotkey-hint">Right Key →</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: APPLICANT PORTAL (MATCHING POTIONLABS) -->
+    <!-- ========================================== -->
+    <div id="tab-apply" class="tab-pane">
+      <div class="form-wrapper">
+        <div class="eyebrow">Interactive Application Simulation</div>
+        <h1 class="title-h1">Apply — AI & Coding Intern</h1>
+        <p class="desc-lead">
+          Test how incoming candidates are evaluated instantly against schema-driven criteria.
+        </p>
+
+        <!-- Quick benchmark presets -->
+        <div class="quick-preset-bar">
+          <span style="font-weight: 600; color: var(--color-ink-2);">⚡ Test Presets:</span>
+          <button class="preset-btn" onclick="loadGarimaPreset()">⭐ Load Garima Raj (Tool-Calling Star)</button>
+          <button class="preset-btn" onclick="loadChatbotPreset()">❌ Load Chatbot Wrapper (Fails Baseline)</button>
+          <button class="preset-btn" onclick="loadDataEngPreset()">⚖️ Load Data Engineer (Borderline)</button>
+        </div>
+
+        <form id="apply-form" onsubmit="handleApplySubmit(event)">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Full Name *</label>
+              <input type="text" id="form-name" class="form-input" required placeholder="Garima Raj">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email *</label>
+              <input type="email" id="form-email" class="form-input" required placeholder="Garimaraj536@gmail.com">
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Phone</label>
+              <input type="tel" id="form-phone" class="form-input" placeholder="+91 7870505606">
+            </div>
+            <div class="form-group">
+              <label class="form-label">City</label>
+              <input type="text" id="form-city" class="form-input" placeholder="Kolkata">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">LinkedIn / Portfolio URL</label>
+            <input type="url" id="form-linkedin" class="form-input" placeholder="https://linkedin.com/in/garimaraj">
+          </div>
+
+          <div class="form-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <label class="form-label" style="margin-bottom: 0;">Anything you want us to read first (0 / 500)</label>
+              <span id="char-counter" style="font-family: var(--font-mono); font-size: 11px; color: var(--color-ink-faint);">0 / 500</span>
+            </div>
+            <textarea id="form-read-first" class="form-textarea" maxlength="500" placeholder="Tell us something specific..." oninput="updateCharCount()"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Technical Skills & Projects / Resume Text *</label>
+            <textarea id="form-resume" class="form-textarea" style="min-height: 160px;" required placeholder="Paste technical experience, tool-calling agents, FastAPI backends, SQL optimizations..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit-app" id="submit-app-btn">
+            Send application → (Run AI Triage)
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: TRANSPARENCY & AUDIT FOLDERS        -->
+    <!-- ========================================== -->
+    <div id="tab-folders" class="tab-pane">
+      <div class="eyebrow">Recruitment Governance</div>
+      <h1 class="title-h1">Transparency & Folder Pipelines</h1>
+      <p class="desc-lead">
+        Audit trail of all applications. No candidate is lost silently: rejected profiles reside in the Double-Check queue for second-pass review, while accepted profiles have verified assignment dispatches.
+      </p>
+
+      <!-- Folder 1: Accepted / Advancing -->
+      <div class="folder-section">
+        <div class="folder-header">
+          <div class="folder-title">
+            <span style="color: var(--color-emerald);">●</span>
+            <span>Accepted / Advancing (Stage 1)</span>
+            <span class="tag-count" id="count-accepted-tag">0</span>
+          </div>
+          <span style="font-size: 12px; color: var(--color-ink-soft);">Technical assignments dispatched via Outbox Worker</span>
+        </div>
+        <div class="table-container">
+          <table id="table-accepted">
+            <thead>
+              <tr>
+                <th>Candidate</th>
+                <th>Location</th>
+                <th>Score</th>
+                <th>Reasoning Summary</th>
+                <th>Email Dispatch</th>
+                <th>Decision Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="6" style="text-align: center; color: var(--color-ink-faint);">Loading accepted candidates...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Folder 2: Double-Check Queue -->
+      <div class="folder-section">
+        <div class="folder-header">
+          <div class="folder-title">
+            <span style="color: var(--color-amber);">●</span>
+            <span>Double-Check / Second Review Queue</span>
+            <span class="tag-count" id="count-double-tag">0</span>
+          </div>
+          <span style="font-size: 12px; color: var(--color-ink-soft);">Profiles rejected in first swipe — available for secondary audit</span>
+        </div>
+        <div class="table-container">
+          <table id="table-double-check">
+            <thead>
+              <tr>
+                <th>Candidate</th>
+                <th>First Pass Status</th>
+                <th>Score</th>
+                <th>AI Diagnostic</th>
+                <th>Secondary Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="5" style="text-align: center; color: var(--color-ink-faint);">No candidates in double-check queue.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Folder 3: Instant Disqualified -->
+      <div class="folder-section">
+        <div class="folder-header">
+          <div class="folder-title">
+            <span style="color: var(--color-rose);">●</span>
+            <span>Instant Baseline Disqualified</span>
+            <span class="tag-count" id="count-disqualified-tag">0</span>
+          </div>
+          <span style="font-size: 12px; color: var(--color-ink-soft);">Zero-delay transparent rejection notification sent</span>
+        </div>
+        <div class="table-container">
+          <table id="table-disqualified">
+            <thead>
+              <tr>
+                <th>Candidate</th>
+                <th>Disqualification Cause</th>
+                <th>Score</th>
+                <th>Notification Status</th>
+                <th>Processed At</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="5" style="text-align: center; color: var(--color-ink-faint);">Loading disqualified history...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 4: WORKER OPS & SCHEMA RULES           -->
+    <!-- ========================================== -->
+    <div id="tab-ops" class="tab-pane">
+      <div class="eyebrow">Backend Architecture & Worker Queue</div>
+      <h1 class="title-h1">Background Worker & Schema-Driven Rules</h1>
+      <p class="desc-lead">
+        Industrial resilience: transactional outbox events, worker polling loops, idempotency checks, and live schema weighting.
+      </p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+        <!-- Left: Live Outbox Event Stream -->
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <h3 style="font-size: 16px; font-weight: 700;">Worker Polling & Event Stream</h3>
+            <span class="brand-badge" style="background: #222; color: #a3e635;">POLL INTERVAL: 2.0s</span>
+          </div>
+          <div class="terminal-window" id="worker-terminal">
+            [SYS] Initializing Outbox Worker polling loop...
+          </div>
+        </div>
+
+        <!-- Right: Config-Driven Weights & Sliders -->
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <h3 style="font-size: 16px; font-weight: 700;">Config-Driven Evaluation Weights</h3>
+            <button class="preset-btn" onclick="saveConfigWeights()">💾 Save Schema Rules</button>
+          </div>
+          <div class="config-card">
+            <div class="slider-row">
+              <label>Tool Calling & Agents (Weight)</label>
+              <input type="range" id="weight-tools" min="10" max="50" value="30" oninput="updateSliderLabel(this)">
+              <span id="label-weight-tools">30%</span>
+            </div>
+            <div class="slider-row">
+              <label>Production Python & Backend</label>
+              <input type="range" id="weight-python" min="10" max="40" value="25" oninput="updateSliderLabel(this)">
+              <span id="label-weight-python">25%</span>
+            </div>
+            <div class="slider-row">
+              <label>SQL & Database Optimization</label>
+              <input type="range" id="weight-sql" min="5" max="30" value="15" oninput="updateSliderLabel(this)">
+              <span id="label-weight-sql">15%</span>
+            </div>
+            <div class="slider-row">
+              <label>Worker & Background Queue Patterns</label>
+              <input type="range" id="weight-worker" min="5" max="30" value="15" oninput="updateSliderLabel(this)">
+              <span id="label-weight-worker">15%</span>
+            </div>
+            <div class="slider-row">
+              <label>Min Score for Review Deck</label>
+              <input type="range" id="weight-min-threshold" min="40" max="80" value="65" oninput="updateSliderLabel(this)">
+              <span id="label-weight-min-threshold">65</span>
+            </div>
+            <p style="font-size: 11px; color: var(--color-ink-faint); margin-top: 12px;">
+              * Changes are written directly to <code>evaluation_rules.json</code> and reloaded by the AI agent without restarting the service.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal for Live Triage Outcome -->
+  <div id="triage-modal" class="triage-alert-modal" style="display: none;">
+    <div class="triage-modal-content">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <span class="eyebrow" id="modal-eyebrow">AI Triage Result</span>
+        <button onclick="closeModal()" style="border: none; background: transparent; font-size: 18px; cursor: pointer;">✕</button>
+      </div>
+      <h2 id="modal-title" style="font-size: 22px; font-weight: 700; margin-bottom: 12px;">Application Processed</h2>
+      <div id="modal-body" style="font-size: 14px; line-height: 1.6; color: var(--color-ink-2); margin-bottom: 24px;"></div>
+      <button onclick="closeModal()" class="btn-submit-app">Got it</button>
+    </div>
+  </div>
+
+  <script>
+    let currentDeckCandidates = [];
+    let currentDeckIndex = 0;
+
+    // Tab Navigation
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+      
+      const btn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick').includes(tabId));
+      if (btn) btn.classList.add('active');
+      
+      const pane = document.getElementById(`tab-${tabId}`);
+      if (pane) pane.classList.add('active');
+
+      const labels = {
+        'deck': 'Swipe Review Deck',
+        'apply': 'Applicant Portal',
+        'folders': 'Transparency & Folder Pipelines',
+        'ops': 'Background Worker & Schema Ops'
+      };
+      document.getElementById('current-tab-label').innerText = labels[tabId] || tabId;
+
+      if (tabId === 'deck') loadDeck();
+      if (tabId === 'folders') loadFolders();
+      if (tabId === 'ops') loadOps();
+      loadMetrics();
+    }
+
+    // Keyboard Shortcuts for Swipe Deck
+    document.addEventListener('keydown', (e) => {
+      const deckPane = document.getElementById('tab-deck');
+      if (deckPane && deckPane.classList.contains('active')) {
+        if (e.key === 'ArrowLeft') {
+          triggerSwipe('reject');
+        } else if (e.key === 'ArrowRight') {
+          triggerSwipe('accept');
+        }
+      }
+    });
+
+    // Load Metrics
+    async function loadMetrics() {
+      try {
+        const res = await fetch('/api/metrics');
+        const data = await res.json();
+        document.getElementById('stat-pending').innerText = data.pending_review || 0;
+        document.getElementById('stat-accepted').innerText = data.accepted_stage1 || 0;
+        document.getElementById('stat-double-check').innerText = data.double_check_review || 0;
+        document.getElementById('stat-disqualified').innerText = data.disqualified_auto || 0;
+        document.getElementById('stat-avg-score').innerText = data.avg_score || '0.0';
+
+        document.getElementById('counter-deck').innerText = data.pending_review || 0;
+        document.getElementById('counter-folders').innerText = (data.accepted_stage1 + data.double_check_review + data.disqualified_auto) || 0;
+      } catch (err) {
+        console.error("Metrics load err:", err);
+      }
+    }
+
+    // Load Swipe Deck
+    async function loadDeck() {
+      try {
+        const res = await fetch('/api/candidates/deck');
+        const data = await res.json();
+        currentDeckCandidates = data.candidates || [];
+        currentDeckIndex = 0;
+        renderCurrentCard();
+      } catch (err) {
+        console.error("Deck load err:", err);
+      }
+    }
+
+    function renderCurrentCard() {
+      const slot = document.getElementById('deck-card-slot');
+      const controls = document.getElementById('deck-controls');
+
+      if (!currentDeckCandidates || currentDeckCandidates.length === 0 || currentDeckIndex >= currentDeckCandidates.length) {
+        slot.innerHTML = `
+          <div class="empty-deck-notice">
+            <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 8px;">🎉 Review Queue Empty</h2>
+            <p>All pending candidate applications for today have been reviewed!</p>
+            <button class="preset-btn" style="margin-top: 16px; padding: 8px 16px;" onclick="switchTab('apply')">Submit New Test Applicant →</button>
+          </div>
+        `;
+        controls.style.display = 'none';
+        return;
+      }
+
+      const c = currentDeckCandidates[currentDeckIndex];
+      const ev = c.evaluation || {};
+      controls.style.display = 'flex';
+
+      slot.innerHTML = `
+        <div class="swipe-card" id="active-card">
+          <div class="card-header">
+            <div>
+              <div class="candidate-name">${c.full_name}</div>
+              <div class="candidate-meta">
+                <span>📍 ${c.city || 'Kolkata'}</span>
+                <span>✉️ ${c.email}</span>
+                ${c.linkedin_portfolio ? `<span>🔗 <a href="${c.linkedin_portfolio}" target="_blank" style="color: var(--color-clay);">Profile</a></span>` : ''}
+              </div>
+            </div>
+            <div class="score-badge">
+              <div class="score-circle">${ev.overall_score || 0}</div>
+              <div class="score-label">MATCH SCORE</div>
+            </div>
+          </div>
+
+          <!-- Score Breakdown -->
+          <div class="breakdown-grid">
+            <div class="breakdown-item">
+              <div class="breakdown-title">Tool Calling / Agents</div>
+              <div class="breakdown-bar"><div class="breakdown-fill" style="width: ${(ev.tool_calling_score / 30) * 100}%"></div></div>
+              <div class="breakdown-num">${ev.tool_calling_score || 0} / 30</div>
+            </div>
+            <div class="breakdown-item">
+              <div class="breakdown-title">Python & Backend</div>
+              <div class="breakdown-bar"><div class="breakdown-fill" style="width: ${(ev.backend_python_score / 25) * 100}%"></div></div>
+              <div class="breakdown-num">${ev.backend_python_score || 0} / 25</div>
+            </div>
+            <div class="breakdown-item">
+              <div class="breakdown-title">SQL & Database</div>
+              <div class="breakdown-bar"><div class="breakdown-fill" style="width: ${(ev.sql_score / 15) * 100}%"></div></div>
+              <div class="breakdown-num">${ev.sql_score || 0} / 15</div>
+            </div>
+          </div>
+
+          <!-- Anything to read first -->
+          ${c.read_first_note ? `
+            <div class="read-first-display">
+              <div class="rf-label">📌 Anything you want us to read first:</div>
+              <div>"${c.read_first_note}"</div>
+            </div>
+          ` : ''}
+
+          <!-- AI Reasoning Summary -->
+          <div class="reasoning-box">
+            <strong>AI Signal Synthesis:</strong> ${ev.reasoning_summary || 'Evaluation pending.'}
+          </div>
+
+          <!-- Resume Excerpt -->
+          <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--color-ink-faint); margin-bottom: 6px;">Technical Experience & System Architecture:</div>
+          <div class="resume-snippet">${c.resume_text || 'No resume text provided.'}</div>
+        </div>
+      `;
+    }
+
+    async function triggerSwipe(action) {
+      if (!currentDeckCandidates || currentDeckIndex >= currentDeckCandidates.length) return;
+      const card = document.getElementById('active-card');
+      const candidate = currentDeckCandidates[currentDeckIndex];
+
+      if (action === 'accept') {
+        if (card) card.classList.add('fly-right');
+      } else {
+        if (card) card.classList.add('fly-left');
+      }
+
+      // Execute backend action
+      try {
+        await fetch(`/api/candidates/${candidate.id}/action`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: action,
+            reviewer_name: 'Raghav Bajoria (PotionLabs)',
+            notes: action === 'accept' ? 'Strong tool-calling and backend depth' : 'Routing to double-check queue for secondary review'
+          })
+        });
+      } catch (err) {
+        console.error("Action API error:", err);
+      }
+
+      setTimeout(() => {
+        currentDeckIndex++;
+        renderCurrentCard();
+        loadMetrics();
+      }, 250);
+    }
+
+    // Load Folders & Pipelines
+    async function loadFolders() {
+      try {
+        const res = await fetch('/api/candidates/folders');
+        const folders = await res.json();
+
+        // 1. Accepted
+        const accBody = document.querySelector('#table-accepted tbody');
+        document.getElementById('count-accepted-tag').innerText = folders.accepted.length;
+        if (folders.accepted.length === 0) {
+          accBody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--color-ink-faint);">No accepted candidates yet.</td></tr>';
+        } else {
+          accBody.innerHTML = folders.accepted.map(c => `
+            <tr>
+              <td><strong>${c.full_name}</strong><br><small style="color: var(--color-ink-faint);">${c.email}</small></td>
+              <td>${c.city || 'Kolkata'}</td>
+              <td><span class="status-pill status-accepted">${c.overall_score}/100</span></td>
+              <td style="max-width: 300px; font-size: 12px;">${c.reasoning_summary}</td>
+              <td><span class="status-pill status-accepted">✓ DISPATCHED (${c.email_delivery_status || 'sent'})</span></td>
+              <td style="font-family: var(--font-mono); font-size: 11px;">${c.updated_at}</td>
+            </tr>
+          `).join('');
+        }
+
+        // 2. Double-Check Queue
+        const dblBody = document.querySelector('#table-double-check tbody');
+        document.getElementById('count-double-tag').innerText = folders.double_check.length;
+        if (folders.double_check.length === 0) {
+          dblBody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--color-ink-faint);">Queue empty. All profiles reviewed!</td></tr>';
+        } else {
+          dblBody.innerHTML = folders.double_check.map(c => `
+            <tr>
+              <td><strong>${c.full_name}</strong><br><small style="color: var(--color-ink-faint);">${c.email}</small></td>
+              <td><span class="status-pill status-double-check">Double-Check Pending</span></td>
+              <td><span class="status-pill status-double-check">${c.overall_score}/100</span></td>
+              <td style="max-width: 280px; font-size: 12px;">${c.last_action_notes || c.reasoning_summary}</td>
+              <td>
+                <button class="btn-promote" onclick="promoteDoubleCheck('${c.id}')">Promote & Accept →</button>
+              </td>
+            </tr>
+          `).join('');
+        }
+
+        // 3. Instant Disqualified
+        const disBody = document.querySelector('#table-disqualified tbody');
+        document.getElementById('count-disqualified-tag').innerText = folders.disqualified_auto.length;
+        if (folders.disqualified_auto.length === 0) {
+          disBody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--color-ink-faint);">No disqualified applicants.</td></tr>';
+        } else {
+          disBody.innerHTML = folders.disqualified_auto.map(c => `
+            <tr>
+              <td><strong>${c.full_name}</strong><br><small style="color: var(--color-ink-faint);">${c.email}</small></td>
+              <td style="color: var(--color-rose); font-weight: 500;">${c.disqualification_reason || 'Criteria mismatch'}</td>
+              <td><span class="status-pill status-disqualified">${c.overall_score}/100</span></td>
+              <td><span class="status-pill status-disqualified">✓ SENT (${c.email_delivery_status || 'sent'})</span></td>
+              <td style="font-family: var(--font-mono); font-size: 11px;">${c.created_at}</td>
+            </tr>
+          `).join('');
+        }
+      } catch (err) {
+        console.error("Folders load err:", err);
+      }
+    }
+
+    async function promoteDoubleCheck(candidateId) {
+      try {
+        await fetch(`/api/candidates/${candidateId}/action`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'double_check_promote',
+            reviewer_name: 'Lead Reviewer (PotionLabs)',
+            notes: 'Secondary audit confirmed high technical potential'
+          })
+        });
+        loadFolders();
+        loadMetrics();
+      } catch (err) {
+        alert("Error promoting candidate: " + err.message);
+      }
+    }
+
+    // Load Ops and Worker Stream
+    async function loadOps() {
+      try {
+        const res = await fetch('/api/outbox/events');
+        const data = await res.json();
+        const term = document.getElementById('worker-terminal');
+        if (data.worker_logs && data.worker_logs.length > 0) {
+          term.innerHTML = data.worker_logs.map(l => `<div>${l}</div>`).join('');
+          term.scrollTop = term.scrollHeight;
+        }
+
+        // Load config weights
+        const cfgRes = await fetch('/api/config');
+        const cfg = await cfgRes.json();
+        if (cfg.weights) {
+          document.getElementById('weight-tools').value = cfg.weights.tool_calling_and_agents || 30;
+          document.getElementById('label-weight-tools').innerText = (cfg.weights.tool_calling_and_agents || 30) + '%';
+          
+          document.getElementById('weight-python').value = cfg.weights.production_python_and_backend || 25;
+          document.getElementById('label-weight-python').innerText = (cfg.weights.production_python_and_backend || 25) + '%';
+          
+          document.getElementById('weight-sql').value = cfg.weights.sql_and_database_design || 15;
+          document.getElementById('label-weight-sql').innerText = (cfg.weights.sql_and_database_design || 15) + '%';
+
+          document.getElementById('weight-worker').value = cfg.weights.worker_and_background_patterns || 15;
+          document.getElementById('label-weight-worker').innerText = (cfg.weights.worker_and_background_patterns || 15) + '%';
+        }
+        if (cfg.hard_constraints) {
+          document.getElementById('weight-min-threshold').value = cfg.hard_constraints.min_overall_score_for_review_deck || 65;
+          document.getElementById('label-weight-min-threshold').innerText = cfg.hard_constraints.min_overall_score_for_review_deck || 65;
+        }
+      } catch (err) {
+        console.error("Ops load err:", err);
+      }
+    }
+
+    function updateSliderLabel(slider) {
+      const label = document.getElementById('label-' + slider.id);
+      if (label) {
+        label.innerText = slider.value + (slider.id.includes('threshold') ? '' : '%');
+      }
+    }
+
+    async function saveConfigWeights() {
+      try {
+        const cfgRes = await fetch('/api/config');
+        const cfg = await cfgRes.json();
+        cfg.weights.tool_calling_and_agents = parseInt(document.getElementById('weight-tools').value);
+        cfg.weights.production_python_and_backend = parseInt(document.getElementById('weight-python').value);
+        cfg.weights.sql_and_database_design = parseInt(document.getElementById('weight-sql').value);
+        cfg.weights.worker_and_background_patterns = parseInt(document.getElementById('weight-worker').value);
+        cfg.hard_constraints.min_overall_score_for_review_deck = parseInt(document.getElementById('weight-min-threshold').value);
+
+        await fetch('/api/config', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(cfg)
+        });
+        alert("Evaluation schema updated successfully! All future triage will use new weights.");
+      } catch (err) {
+        alert("Failed to save config: " + err.message);
+      }
+    }
+
+    // Apply Form Submission
+    async function handleApplySubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submit-app-btn');
+      btn.disabled = true;
+      btn.innerText = "Evaluating applicant signals with AI Agent...";
+
+      const payload = {
+        full_name: document.getElementById('form-name').value,
+        email: document.getElementById('form-email').value,
+        phone: document.getElementById('form-phone').value,
+        city: document.getElementById('form-city').value,
+        linkedin_portfolio: document.getElementById('form-linkedin').value,
+        source_attribution: 'PotionLabs Careers Portal',
+        read_first_note: document.getElementById('form-read-first').value,
+        resume_text: document.getElementById('form-resume').value
+      };
+
+      try {
+        const res = await fetch('/api/apply', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        
+        btn.disabled = false;
+        btn.innerText = "Send application → (Run AI Triage)";
+
+        showTriageModal(data);
+        loadMetrics();
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerText = "Send application → (Run AI Triage)";
+        alert("Application error: " + err.message);
+      }
+    }
+
+    function showTriageModal(data) {
+      const modal = document.getElementById('triage-modal');
+      const title = document.getElementById('modal-title');
+      const body = document.getElementById('modal-body');
+      const ev = data.evaluation || {};
+
+      if (data.status === 'pending_review') {
+        title.innerHTML = `<span style="color: var(--color-emerald);">✓ Qualified for Review Deck (Score: ${ev.overall_score}/100)</span>`;
+        body.innerHTML = `
+          <p><strong>Candidate:</strong> ${document.getElementById('form-name').value}</p>
+          <p><strong>Status:</strong> Passed baseline constraints. Routed to Recruiter Swipe Deck.</p>
+          <p style="margin-top: 10px;"><strong>AI Assessment:</strong> ${ev.reasoning_summary}</p>
+          <div style="margin-top: 14px; background: var(--color-sand); padding: 10px; border-radius: 6px; font-size: 12px;">
+            Tool Calling: <strong>${ev.tool_calling_score}/30</strong> | Python: <strong>${ev.backend_python_score}/25</strong> | SQL: <strong>${ev.sql_score}/15</strong>
+          </div>
+        `;
+      } else {
+        title.innerHTML = `<span style="color: var(--color-rose);">✕ Baseline Disqualified (Instant Transparency Email Queued)</span>`;
+        body.innerHTML = `
+          <p><strong>Candidate:</strong> ${document.getElementById('form-name').value}</p>
+          <p><strong>Reason:</strong> ${ev.disqualification_reason}</p>
+          <p style="margin-top: 10px;"><strong>Candidate Experience:</strong> Candidate received an instant respectful rejection notification within seconds. No 3-week waiting limbo.</p>
+          <div style="margin-top: 14px; background: #fef2f2; border: 1px solid #fecaca; padding: 10px; border-radius: 6px; font-size: 12px; color: #991b1b;">
+            Outbox Event queued with SHA256 Idempotency Key. Background worker dispatched transactional email.
+          </div>
+        `;
+      }
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('triage-modal').style.display = 'none';
+    }
+
+    function updateCharCount() {
+      const len = document.getElementById('form-read-first').value.length;
+      document.getElementById('char-counter').innerText = `${len} / 500`;
+    }
+
+    // Presets
+    function loadGarimaPreset() {
+      document.getElementById('form-name').value = "Garima Raj";
+      document.getElementById('form-email').value = "Garimaraj536@gmail.com";
+      document.getElementById('form-phone').value = "+91 7870505606";
+      document.getElementById('form-city').value = "Kolkata";
+      document.getElementById('form-linkedin').value = "https://linkedin.com/in/garimaraj";
+      document.getElementById('form-read-first').value = "Built this live AI x Operations Recruitment Engine to solve PotionLabs candidate volume bottleneck with tool-calling agents & background workers.";
+      document.getElementById('form-resume').value = `Garima Raj | Kolkata | Heritage Institute of Technology (B.Tech CSE Data Science, 2027)
+AI & Agent Systems Engineer | Backend & LLM Systems
+Architected autonomous agents with FastAPI, Google Gemini, and OpenAI APIs utilizing structured function calling, multi-step tool orchestration, and automated evaluation/regression testing. 250+ LeetCode DSA solved. Winner HackHeritage 3.0.
+
+Projects:
+1. StockSikh: Autonomous Trading Agent with structured tool calling interfacing dynamically with Yahoo Finance APIs. Strict JSON Schema output validation and prompt fallback routines to eliminate hallucinations. Async FastAPI backend.
+2. RetailSphere: Retail operations and wait-time prediction platform cutting queue delays by 30%. Modular REST APIs in Flask/MySQL.
+3. Her Voice: Real-time emergency triage agent using OpenAI APIs to classify incident severity and dispatch distress tickets.
+4. Walmart USA: Python/Pandas ETL pipeline for retail inventory and shipment records loaded into SQLite.
+
+Skills: Function Calling, Tool Use, Pydantic, JSON Schema, Gemini API, OpenAI API, FastAPI, Asyncio, MySQL, PostgreSQL, Background queue workers, Idempotent processing.`;
+      updateCharCount();
+    }
+
+    function loadChatbotPreset() {
+      document.getElementById('form-name').value = "Rohan Gupta";
+      document.getElementById('form-email').value = "rohan.chat@example.com";
+      document.getElementById('form-phone').value = "+91 9123456789";
+      document.getElementById('form-city').value = "Bengaluru";
+      document.getElementById('form-linkedin').value = "https://github.com/rohan-chat";
+      document.getElementById('form-read-first').value = "Check my simple chatbot project made on weekend.";
+      document.getElementById('form-resume').value = `Fresher Developer.
+Projects:
+ChatGPT Wrapper Bot: Built a simple prompt chatbot using Streamlit and OpenAI API chat completion.
+Basic UI chat where user sends question and gets LLM answer.
+No backend framework used. No database experience. No tool calling.`;
+      updateCharCount();
+    }
+
+    function loadDataEngPreset() {
+      document.getElementById('form-name').value = "Priya Sharma";
+      document.getElementById('form-email').value = "priya.data@example.com";
+      document.getElementById('form-phone').value = "+91 9748003344";
+      document.getElementById('form-city').value = "Kolkata";
+      document.getElementById('form-linkedin').value = "https://linkedin.com/in/priyasharma";
+      document.getElementById('form-read-first').value = "Strong in SQL schema optimization and ETL pipelines.";
+      document.getElementById('form-resume').value = `Data Engineer. Skilled in Python, SQL, PostgreSQL, database schema design, and ETL pipelines. Built automated data ingestion scripts for warehouse loading. Familiar with background cron jobs and queue polling basics. Looking to transition into industrial AI agent workflows.`;
+      updateCharCount();
+    }
+
+    // Auto refresh worker logs every 3 seconds if on Ops tab
+    setInterval(() => {
+      const opsPane = document.getElementById('tab-ops');
+      if (opsPane && opsPane.classList.contains('active')) {
+        loadOps();
+      }
+    }, 3000);
+
+    // Initial load
+    window.onload = () => {
+      loadDeck();
+      loadMetrics();
+    };
+  </script>
+</body>
+</html>

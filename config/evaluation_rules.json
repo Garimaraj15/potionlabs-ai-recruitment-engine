@@ -1,0 +1,50 @@
+{
+  "role": "AI & Coding Intern (AI × Operations)",
+  "version": "1.0.0",
+  "company": "PotionLabs (JD Jones & Co.)",
+  "hard_constraints": {
+    "require_python": true,
+    "disallow_chatbot_only": true,
+    "require_tool_calling_or_automation": true,
+    "min_overall_score_for_review_deck": 65
+  },
+  "weights": {
+    "tool_calling_and_agents": 30,
+    "production_python_and_backend": 25,
+    "sql_and_database_design": 15,
+    "worker_and_background_patterns": 15,
+    "real_world_projects_depth": 15
+  },
+  "scoring_rubric": {
+    "tool_calling_and_agents": {
+      "keywords": ["function calling", "tool use", "agent", "autonomous", "workflow", "schema", "pydantic", "gemini", "openai", "claude code", "cursor"],
+      "negative_keywords": ["chatgpt wrapper", "simple prompt chatbot", "basic ui chat"]
+    },
+    "production_python_and_backend": {
+      "keywords": ["fastapi", "flask", "asyncio", "rest api", "endpoint", "microservice", "docker", "pydantic"],
+      "negative_keywords": ["only jupyter", "no backend experience"]
+    },
+    "sql_and_database_design": {
+      "keywords": ["sql", "mysql", "postgresql", "sqlite", "query optimization", "cte", "indexing", "schema design", "etl"],
+      "negative_keywords": ["no sql"]
+    },
+    "worker_and_background_patterns": {
+      "keywords": ["queue", "polling", "retry", "idempotent", "background worker", "celery", "thread", "redis", "cron"],
+      "negative_keywords": []
+    },
+    "real_world_projects_depth": {
+      "keywords": ["production", "live", "deployed", "users", "hackathon", "winner", "operational", "latency", "triage"],
+      "negative_keywords": ["todo app", "calculator", "tutorial clone", "titanic dataset"]
+    }
+  },
+  "templates": {
+    "instant_rejection_email": {
+      "subject": "Update on your PotionLabs AI & Coding Intern application",
+      "body": "Hi {name},\n\nThank you for applying for the AI & Coding Intern role at PotionLabs.\n\nWe believe in complete transparency and respect your time. Rather than making you wait weeks in an uncertain queue, our system performs an immediate baseline assessment.\n\nAt this time, your profile did not meet our baseline requirements ({reason}). For this role, we require hands-on experience with production-level Python, background worker patterns, and AI agents that execute real actions and tool calls (rather than conversational chatbot interfaces).\n\nWe encourage you to explore tool-calling patterns and real backend systems, and we welcome your application in future hiring cycles.\n\nBest regards,\nPotionLabs Hiring Team"
+    },
+    "advance_confirmation_email": {
+      "subject": "Your PotionLabs application is moving forward — One Step Ahead",
+      "body": "Hi {name},\n\nGreat news! Your application and project architecture for the AI & Coding Intern role have passed our technical review.\n\nOur founding team was impressed by your work on tool-calling agents and production backend engineering. You are officially one step ahead in our process.\n\nHere is your technical challenge link: {assignment_link}\n\nPlease review the instructions and complete the implementation within 48 hours.\n\nBest regards,\nRaghav Bajoria & PotionLabs Team"
+    }
+  }
+}
